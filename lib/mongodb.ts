@@ -6,7 +6,11 @@ interface MongooseCache {
 }
 
 declare global {
-  var mongoose: MongooseCache | undefined;
+  namespace NodeJS {
+    interface Global {
+      mongoose: MongooseCache;
+    }
+  }
 }
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/persona-hub';
@@ -15,10 +19,13 @@ if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable');
 }
 
-let cached = global.mongoose;
+// Explicitly cast 'global' to the extended type to resolve the implicit 'any' type error
+const globalWithMongoose = global as typeof global & { mongoose: MongooseCache };
+
+let cached = globalWithMongoose.mongoose;
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+  cached = globalWithMongoose.mongoose = { conn: null, promise: null };
 }
 
 async function dbConnect() {

@@ -4,11 +4,10 @@ import { motion } from 'framer-motion';
 
 interface FadeInParagraphProps {
   text: string;
-  index: number;
   isRTL?: boolean;
 }
 
-export default function FadeInParagraph({ text, index, isRTL = false }: FadeInParagraphProps) {
+export default function FadeInParagraph({ text, isRTL = false }: FadeInParagraphProps) {
   return (
     <motion.p
       className={`mb-4 text-paragraph ${isRTL ? 'text-right' : ''}`}
