@@ -1,8 +1,11 @@
+'use client';
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Source_Sans_3 } from "next/font/google";
 import Navbar from "./components/Navbar";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,11 +24,6 @@ const sourceSans3 = Source_Sans_3({
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
-export const metadata: Metadata = {
-  title: "Persona Hub",
-  description: "Your personal hub for connecting and sharing",
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,8 +34,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${sourceSans3.className} antialiased`}
       >
-        <Navbar />
-        {children}
+        <SessionProvider>
+          <Navbar />
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );
