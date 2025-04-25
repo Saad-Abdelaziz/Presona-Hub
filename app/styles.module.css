@@ -1,0 +1,24 @@
+/* Base styles */
+.background {
+  background-color: #F8FAFC;
+}
+
+.text-primary {
+  color: #001E37;
+}
+
+.text-paragraph {
+  color: #1E293B;
+}
+
+.button-primary {
+  background-color: #001E37;
+}
+
+.border-neutral {
+  border-color: #E2E8F0;
+}
+
+.cta {
+  background-color: #FACC15;
+}
